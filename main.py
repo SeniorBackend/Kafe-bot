@@ -1,3 +1,5 @@
+
+from email import message
 import logging
 from os import replace, stat
 from aiogram import Bot, Dispatcher, executor, types
@@ -5,7 +7,7 @@ from aiogram.dispatcher.filters import state
 from config import TOKEN
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext 
-from button import menu,ichimliklar,kochataomi,ovqat,zakaz
+from button import menu,ichimliklar,kochataomi,ovqat,zakaz,raqam
 from statelar import Translate
 from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
@@ -17,7 +19,7 @@ dp = Dispatcher(bot,storage=MemoryStorage())
 @dp.message_handler(commands=['start', 'help'])
 async def send_welcome(message: types.Message):
     user = message.from_user.first_name
-    await message.answer(f"Assalomu aleykum {user}😊\nBizning kafe botga xush kelibsiz😄", reply_markup=menu)
+    await message.answer(f"Assalomu aleykum {user}😊\nBizning kafe botga xush kelibsiz😄\nBu bot hozircha test rejimida😄", reply_markup=menu)
 @dp.message_handler(Text(equals="🍱Menu"))
 async def jjj(message):
     await message.answer('🍱Menu',reply_markup=ovqat)
@@ -56,90 +58,43 @@ async def fwf(message):
 @dp.message_handler(state=Translate.gamburgerset)
 async def sss(message,state:FSMContext):
 
-    await message.answer(f'{message.text} 🍔{int(message.text)*12000}so\'m💴',reply_markup=zakaz)
-    await Translate.gamburgerbuyurtma.set()
-@dp.message_handler(state=Translate.gamburgerbuyurtma)
-async def hhh(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🍔{int(message.text)*12000}so\'m💴',reply_markup=raqam)
+
     await state.finish()
 @dp.message_handler(state=Translate.pitsaset)
 async def ss(message,state:FSMContext):
-    await message.answer(f'{message.text} 🍕 {int(message.text)*16000}so\'m💴',reply_markup=zakaz)
-    await Translate.pitsabuyurtma.set()
-@dp.message_handler(state=Translate.pitsabuyurtma)
-async def hhh(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🍕 {int(message.text)*16000}so\'m💴',reply_markup=raqam)
+
     await state.finish()
 @dp.message_handler(state=Translate.hotdogset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🌭 {int(message.text)*9000}so\'m💴',reply_markup=zakaz)
-    await Translate.hotdogbuyurtma.set()
-@dp.message_handler(state=Translate.hotdogbuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🌭 {int(message.text)*9000}so\'m💴',reply_markup=raqam)
     await state.finish()
+
+    
+
 
 
 @dp.message_handler(state=Translate.somsaset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🥟 {int(message.text)*8000}so\'m💴',reply_markup=zakaz)
-    await Translate.somsabuyurtma.set()
-@dp.message_handler(state=Translate.somsabuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🥟 {int(message.text)*8000}so\'m💴',reply_markup=raqam)
     await state.finish()
 @dp.message_handler(state=Translate.shavermaset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🥟 {int(message.text)*10000}so\'m💴',reply_markup=zakaz)
-    await Translate.shavermabuyurtma.set()
-@dp.message_handler(state=Translate.shavermabuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🥟 {int(message.text)*10000}so\'m💴',reply_markup=raqam)
+
     await state.finish()
 @dp.message_handler(state=Translate.lavashset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🌮 {int(message.text)*17000}so\'m💴',reply_markup=zakaz)
-    await Translate.lavashbuyurtma.set()
-@dp.message_handler(state=Translate.lavashbuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🌮 {int(message.text)*17000}so\'m💴',reply_markup=raqam)
+
     await state.finish()
 
 
 
 @dp.message_handler(Text(equals="🍾Ichimliklar"))
 async def ff(message):
-    await message.answer('Nechta buyurtma qilasiz?',reply_markup=ichimliklar)
+    await message.answer('Yaxna ichimliklar🍷',reply_markup=ichimliklar)
 @dp.message_handler(Text(equals="🍻Coca-cola"))
 async def ffw(message):
     await message.answer('Nechta buyurtma qilasiz?😃')
@@ -160,53 +115,42 @@ async def ffw(message):
 
 @dp.message_handler(state=Translate.colaset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🍻 {int(message.text)*9000}so\'m💴',reply_markup=zakaz)
-    await Translate.colabuyurtma.set()
-@dp.message_handler(state=Translate.colabuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🍻 {int(message.text)*9000}so\'m💴',reply_markup=raqam)
+    await state.finish()
 
 @dp.message_handler(state=Translate.pepsiset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🍷 {message.text}{int(message.text)*8000}so\'m💴',reply_markup=zakaz)
-    await Translate.pepsibuyurtma.set()
-@dp.message_handler(state=Translate.pepsibuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🍷 {message.text}{int(message.text)*8000}so\'m💴',reply_markup=raqam)
+    await state.finish()
 @dp.message_handler(state=Translate.fantaset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🍸 {int(message.text)*9000}so\'m💴',reply_markup=zakaz)
-    await Translate.fantabuyurtma.set()
-@dp.message_handler(state=Translate.fantabuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('Xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
+    await message.answer(f'{message.text} 🍸 {int(message.text)*9000}so\'m💴',reply_markup=raqam)
+    await state.finish()
+
 @dp.message_handler(state=Translate.spriteset)
 async def ssk(message,state:FSMContext):
-    await message.answer(f'{message.text} 🍹 {int(message.text)*10000}so\'m💴',reply_markup=zakaz)
-    await Translate.spritebuyurtma.set()
-@dp.message_handler(state=Translate.spritebuyurtma)
-async def sjkf(message,state:FSMContext):
-    if message.text=='📍Manzilimni yuborish':
-        await message.answer('xaridingiz uchun raxmat',reply_markup=menu)
-        await state.finish()
-    elif message.text=='Bekor qilish':
-        await state.finish()
-        await message.answer('Menyu',reply_markup=menu)
-if __name__ == '__main__':
+    await message.answer(f'{message.text} 🍹 {int(message.text)*10000}so\'m💴',reply_markup=raqam)
+    await state.finish()
+@dp.message_handler(Text(equals=['Raqamimni ulashish']))
+async def ddd(message):
+    await message.answer('Telefon raqamingizni kiriting')
+    await message.delete()
+    await Translate.raqam.set()
+@dp.message_handler(state=Translate.raqam)
+async def ffg(message,state:FSMContext):
+    if message.text[0:4]=='+998' and len(message.text)==13:
+        await message.answer('Iltimos joylashuvingizni yuboring M-n:Urganch sh,Abulg`oziy Bahodirxon,110A uy',reply_markup=zakaz)
+        await Translate.manzil.set()
+    else:
+        await message.answer('Iltimos raqamni to`g`ri kiriting(+998)')
+
+@dp.message_handler(state=Translate.manzil)
+async def ggg(message,state:FSMContext):
+    if str(message.text[0:7])=='Urganch':
+        await message.answer('Buyurtma qabul qilindi😃 Tez orada yetkazib beriladi🚴‍♂️')
+        await message.answer('Murojaat uchun @deSeniorcoder',reply_markup=menu)
+if  __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
+
+
 
