@@ -22,3 +22,5 @@ class Translate(StatesGroup):
     fantabuyurtma=State()
     pepsibuyurtma=State()
     spritebuyurtma=State()
+    raqam=State()
+    manzil=State()
